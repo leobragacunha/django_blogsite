@@ -11,7 +11,7 @@ class User(AbstractUser):
                                     help_text='Upload a profile picture!')
     bio = models.TextField(max_length=1000, null=True, blank=True,
                            help_text="Tell us a bit more about yourself!")
-    date_of_birth = models.DateField()
+    date_of_birth = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return f"@{self.username}"

@@ -2,9 +2,28 @@
 
 {% block content %}
 
+    <h1>Welcome to The BLOG!</h1>
+    <br>
+    <h4>We are the best social network of the moment!</h4>
+    <br>
+    <h4>Right now, we have {{ num_users }} users and {{ num_posts }} posts</h4>
+    <br>
+    <br>
+    {% if user.is_authenticated %}
 
+    <button type="button" class="btn btn-primary">Whats going on?</button>   
+    <br>
+    <br>
+    <button type="button" class="btn btn-primary">Time to write something!</button>   
 
-
+    {% else %}
+        <p><button type="button" class="btn btn-primary">Start right now</button>
+        <span>     or     </span>
+        <button type="button" class="btn btn-primary">Login</button> 
+        <span>    if you already have an account!</span></p>
+        
+    {% endif %}
+    
 {% endblock content %}
 
 
