@@ -18,8 +18,8 @@ class Post(models.Model):
     
 
 class Comment(models.Model):
-    blogger = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     created_date = models.DateTimeField("Created on")
+    post = models.ForeignKey(Post, on_delete=models.SET_NULL, null=True)
     comment = models.TextField(max_length=1000)
 
     def __str__(self):
