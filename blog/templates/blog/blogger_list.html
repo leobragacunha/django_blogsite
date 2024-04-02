@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <title>BLOG | Bloggers</title>
+{% endblock title %}
+
+{% block content %}
+
+    <h1>Take a look at our bloggers!</h1>
+
+    {% if blogger_list %}
+        {% for blogger in blogger_list %}
+            <hr>
+            <a href=""><strong>{{ blogger }}</strong></a>
+            <p>{{ blogger.first_name }} {{ blogger.last_name }}</p>
+        
+        {% endfor %}
+    
+    
+    {% endif %}
+
+{% endblock content %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <title>BLOG | Check this post!</title>
+{% endblock title %}
+
+{% block content %}
+    
+    {% if post %}
+        <h3>{{ post }}</h3>
+        <a href="{% url 'blog:blogger-detail' post.blogger.pk %}"><h6>{{ post.blogger }}</h6></a>
+        <p><small>{{ post.created_date }}</small></p>
+        <br>
+        <p>{{ post.content }}</p>
+    {% else %}
+        <p>Oh no!!! We don't have posts yet</p>    
+    {% endif %}
+
+{% endblock content %}
+
+
+

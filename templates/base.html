@@ -15,23 +15,23 @@
     
     <nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme='dark'>
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">The BLOG</a>
+          <a class="navbar-brand" href="{% url 'home' %}">The BLOG</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link" href="#">Home</a>
+                <a class="nav-link" href="{% url 'home' %}">Home</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">About</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Bloggers</a>
+                <a class="nav-link" href="{% url 'blog:bloggers' %}">Bloggers</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Posts</a>
+                <a class="nav-link" href="{% url 'blog:posts' %}">Posts</a>
               </li>
             </ul>
             <ul class="navbar-nav mb-2 mb-lg-0">
