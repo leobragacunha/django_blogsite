@@ -12,6 +12,27 @@
         <p><small>{{ post.created_date }}</small></p>
         <br>
         <p>{{ post.content }}</p>
+        <br>
+
+        <!-- Editing button for blogger who wrote the post -->
+        {% if post.blogger.pk == request.user.id %}
+            <a class="btn btn-primary" href="{% url 'blog:post-update' post.pk %}">Edit</a>
+            <a class="btn btn-danger" href="{% url 'blog:post-delete' post.pk %}">Delete</a>
+        {% endif %}
+        
+        {% if post.comments.count > 0 %}
+            <hr>
+            <h5><strong>Comments:</strong></h5>
+            <br>
+            {% for comment in post.comments.all %}
+                <a href=""><strong>{{comment.comment_bolgger}}</strong></a>
+                <small>{{ comment.created_date }}</small>
+                <p>{{ comment.comment }}</p>
+            {% endfor %}
+
+        {% endif %}
+        
+
     {% else %}
         <p>Oh no!!! We don't have posts yet</p>    
     {% endif %}

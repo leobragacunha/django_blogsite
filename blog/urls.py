@@ -11,5 +11,7 @@ urlpatterns = [
     path("bloggers/", views.BloggersListView.as_view(), name='bloggers'),
     path("blogger/<int:pk>", views.BloggerDetailView.as_view(), name='blogger-detail'),
     # CRUD VIEWS
-
+    path("post/new/", views.PostCreateView.as_view(), name='post-new'),
+    path("post/<int:pk>/update/", views.PostUpdateView.as_view(), name='post-update'),
+    path("post/<int:pk>/delete/", views.PostDeleteView.as_view(), name='post-delete'),
 ]
