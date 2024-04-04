@@ -28,4 +28,7 @@ class Comment(models.Model):
     def __str__(self):
         return f"{self.comment_blogger} on {self.post} at {self.updated_date}"
 
+    def get_absolute_url(self):
+        return reverse("blog:post-detail", kwargs={"pk": self.post.pk})
+    
 

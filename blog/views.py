@@ -2,7 +2,7 @@ from typing import Any, Dict
 from django.db.models.query import QuerySet
 from django.forms.models import BaseModelForm
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 
 from django.views import generic
@@ -66,16 +66,45 @@ class PostDeleteView(LoginRequiredMixin ,generic.DeleteView):
     success_url = reverse_lazy('blog:posts')
 
 
-class CommentCreateView(generic.CreateView):
-    pass
+class CommentCreateView(LoginRequiredMixin, generic.CreateView):
+    model = blog_models.Comment
+    fields = ['comment']
+    template_name = "blog/comment_form.html"
+
+    def get_context_data(self, **kwargs: Any):
+        context = super(CommentCreateView,self).get_context_data(**kwargs)
+        context['post'] = get_object_or_404(blog_models.Post, pk = self.kwargs['pk'])
+        return context
+    
+    def form_valid(self, form):
+        form.instance.comment_blogger = self.request.user
+        form.instance.post = get_object_or_404(blog_models.Post, pk = self.kwargs['pk'])
+        form.save()
+        return super(CommentCreateView,self).form_valid(form)
+    
+
+class CommentUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = blog_models.Comment
+    fields = ["comment"]
+    template_name = "blog/comment_form.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(CommentUpdateView,self).get_context_data(**kwargs)
+        context['post'] = get_object_or_404(blog_models.Post, pk = self.kwargs['postpk'])
+        context['comment'] = self.get_object()
+        return context
 
 
-class CommentUpdateView(generic.UpdateView):
-    pass
+class CommentDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = blog_models.Comment
+    template_name = 'blog/comment_confirm_delete.html'
 
-
-class CommentDeleteView(generic.DeleteView):
-    pass
+    def form_valid(self, form):
+        self.object = self.get_object()
+        return super().form_valid(form)
+    
+    def get_success_url(self):
+        return reverse_lazy('blog:post-detail', kwargs={'pk':self.object.post.id})
 
 
 class PostPerUserView(LoginRequiredMixin, generic.ListView):

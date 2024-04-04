@@ -19,15 +19,34 @@
             <a class="btn btn-primary" href="{% url 'blog:post-update' post.pk %}">Edit</a>
             <a class="btn btn-danger" href="{% url 'blog:post-delete' post.pk %}">Delete</a>
         {% endif %}
-        
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-sm-9">
+                <h5><strong>Comments:</strong></h5>
+            </div>
+            <div class="col-sm-3">
+                <a class="btn btn-primary" href="{% url 'blog:comment-new' post.pk %}">Add comment</a>
+            </div>
+        </div>
         {% if post.comments.count > 0 %}
+        {% for comment in post.comments.all %}
             <hr>
-            <h5><strong>Comments:</strong></h5>
-            <br>
-            {% for comment in post.comments.all %}
-                <a href=""><strong>{{comment.comment_bolgger}}</strong></a>
-                <small>{{ comment.created_date }}</small>
-                <p>{{ comment.comment }}</p>
+            <div class="row">
+                <div class="col-sm-9">
+                    <a href="{% url 'blog:blogger-detail' comment.comment_blogger.pk %}"><strong>{{comment.comment_blogger}}</strong></a>
+                    <small>{{ comment.created_date }}</small>
+                    <p>{{ comment.comment }}</p>
+                </div>
+                <div class="col-sm-3">
+                    {% if comment.comment_blogger.pk == request.user.id %}
+                        <a class="btn btn-primary" href="{% url 'blog:comment-update' comment.post.pk comment.pk %}">Edit</a>
+                        <a class="btn btn-danger" href="{% url 'blog:comment-delete' comment.post.pk comment.pk %}">Delete</a>
+                    {% endif %}
+                </div>
+            </div> 
+            
+               
             {% endfor %}
 
         {% endif %}

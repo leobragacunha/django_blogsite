@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block  title %}
+    <title>BLOG | Delete Comment</title>
+{% endblock title %}
+
+{% block content %}
+    <h3>Delete comment</h3>
+    <p>Are you sure you want to delete the following comment?</p>
+    <p>**This action can't be undone</p>
+    <hr>
+    {{comment.comment}}
+    <hr>
+    <form action="" method="post">
+        {% csrf_token %}
+        <input class="btn btn-danger" type="submit" value="Delete">
+        <a class="btn btn-primary" href="{% url 'blog:post-detail' comment.post.pk %}">Cancel</a>
+    </form>
+{% endblock content %}
+
+
+
