@@ -11,7 +11,7 @@
     {% if blogger_list %}
         {% for blogger in blogger_list %}
             <hr>
-            <a href=""><strong>{{ blogger }}</strong></a>
+            <a href="{% url 'blog:blogger-detail' blogger.pk %}"><strong>{{ blogger }}</strong></a>
             <p>{{ blogger.first_name }} {{ blogger.last_name }}</p>
         
         {% endfor %}

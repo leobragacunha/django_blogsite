@@ -9,8 +9,12 @@
 
     <form action="" method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        <table>
+            {{ form.as_table }}
+        </table>
+        
         <input type="submit" class="btn btn-primary" value="Create">
+        <a class="btn btn-danger" href="{% url 'home' %}">Cancel</a>
     </form>
 
 {% endblock content %}

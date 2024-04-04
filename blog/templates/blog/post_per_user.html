@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <title>BLOG | My posts</title>
+{% endblock title %}
+
+{% block content %}
+
+    <h3>Take a look at your posts!</h3>
+
+    {% if post_list %}
+        <h5>You have {{ post_list.count }} posts. </h5>
+        {% for post in post_list|dictsortreversed:"created_date" %}
+            <hr>
+            <a href="{% url 'blog:post-detail' post.pk %}"><strong>{{ post }}</strong></a>
+            <p>Created on: {{ post.created_date}}</p>
+            <p>Updated on: {{ post.updated_date }}</p>
+        {% endfor %}
+    
+    {% endif %}
+
+{% endblock content %}
+
+
+
+

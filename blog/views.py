@@ -76,3 +76,11 @@ class CommentUpdateView(generic.UpdateView):
 
 class CommentDeleteView(generic.DeleteView):
     pass
+
+
+class PostPerUserView(LoginRequiredMixin, generic.ListView):
+    model = blog_models.Post 
+    template_name = "blog/post_per_user.html"
+
+    def get_queryset(self):
+        return blog_models.Post.objects.filter(blogger = self.request.user).order_by('-updated_date')

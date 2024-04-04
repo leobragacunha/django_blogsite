@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <title>BLOG | Edit Profile</title>
+{% endblock title %}
+
+{% block content %}
+    <h3>Edit Profile:</h3>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <table>
+            {{form.as_table}}
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" class="btn btn-success" value="Update">
+                    <a class="btn btn-danger" href="{% url 'blog:blogger-detail' user.pk %}">Cancel</a>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+
+{% endblock content %}
+
+
+
+

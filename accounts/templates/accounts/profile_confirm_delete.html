@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <title>BLOG | Delete Profile</title>
+{% endblock title %}
+
+{% block content %}
+    <h3>Delete profile</h3>
+    <br>
+    <p>Are you sure you want to delete your user ({{user}})? </p>
+    <p>This action can't be undone!!!</p>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-danger" value="Delete">
+        <a class="btn btn-primary" href="{% url 'blog:blogger-detail' user.pk %}">Cancel</a>
+    </form>
+
+{% endblock content %}
+

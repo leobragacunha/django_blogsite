@@ -15,6 +15,11 @@
             <h4>{{ blogger.first_name }} {{ blogger.last_name }}</h4>
             <hr>
             <p>{{ blogger.bio }}</p>
+
+            {% if blogger.pk == request.user.id %}
+                <a class="btn btn-primary" href="{% url 'accounts:profile-update' blogger.pk %}">Edit profile</a>
+                <a class="btn btn-danger" href="{% url 'accounts:profile-delete' blogger.pk %}">Delete</a>
+            {% endif %}
             
         </div>      
     </div>
